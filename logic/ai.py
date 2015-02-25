@@ -139,4 +139,12 @@ class jon(RandomPlayer):
 					self.board.put_mark(self, i, j)
 					self.taunt = None
 					return
+		
+		for i in range(3):
+			for j in range(3):
+				if cause_victory(self.board, self, i, j) == False:
+					self.board.put_mark(self, i, j)
+					self.taunt = None
+					return
+		
 		RandomPlayer.logic(self)
