@@ -36,8 +36,8 @@ class OptionsScreen:
 		self.player_x_type = RadioGroup(screen, 20, self.player_x_rect.bottom + 70, type_x, True, *types)
 		self.player_o_type = RadioGroup(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 70, type_o, True, *types)
 		
-		self.player_x_pic_rect = (20, screen.get_height() - 200, 128, 128)
-		self.player_o_pic_rect = (screen.get_width()/2+20, screen.get_height() - 200, 128, 128)
+		self.player_x_pic_rect = pygame.Rect(20, screen.get_height() - 200, 128, 128)
+		self.player_o_pic_rect = pygame.Rect(screen.get_width()/2+20, screen.get_height() - 200, 128, 128)
 		
 	def event(self, event):
 		self.player_x_box.event(event)

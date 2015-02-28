@@ -1,7 +1,9 @@
 import pygame, assets
 from screen.title import TitleScreen
 from screen.exit import WussScreen
-pygame.init()
+
+pygame.display.init()
+pygame.font.init()
 
 size = width, height = 640, 480
 screen = pygame.display.set_mode(size)
