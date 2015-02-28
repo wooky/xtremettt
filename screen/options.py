@@ -7,7 +7,7 @@ from logic.ai import RandomPlayer, BlockingPlayer, SmartPlayer, jon
 from game import GameScreen
 
 class OptionsScreen:
-	def __init__(self, screen, player_x = "", player_o = "", type_x = None, type_o = None):
+	def __init__(self, screen, player_x = "", player_o = "", type_x = HumanPlayer, type_o = HumanPlayer):
 		self.screen = screen
 		
 		font = pygame.font.SysFont(assets.font, 36)
@@ -27,7 +27,7 @@ class OptionsScreen:
 		self.player_o_rect = self.player_o_title.get_rect()
 		self.player_o_rect.midtop = (screen.get_width()*3/4, 50)
 		self.footer_rect = self.footer.get_rect()
-		self.footer_rect.midtop = (screen.get_width()/2, screen.get_height()*3/4)
+		self.footer_rect.midbottom = (screen.get_width()/2, screen.get_height()-10)
 		
 		self.player_x_box = Textbox(screen, 20, self.player_x_rect.bottom + 20, screen.get_width()/2 - 40, 11, player_x)
 		self.player_o_box = Textbox(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 20, screen.get_width()/2 - 40, 11, player_o)
