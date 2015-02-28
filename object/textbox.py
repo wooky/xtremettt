@@ -7,10 +7,7 @@ class Textbox:
 		self.font = pygame.font.SysFont(assets.font, 16)
 	
 		self.screen = screen
-		self.x = x
-		self.y = y
-		self.w = w
-		self.h = self.font.size("SAMPLE TEXT")[1] + 4
+		self.rect = pygame.Rect(x, y, w, self.font.size("SAMPLE TEXT")[1] + 4)
 		self.limit = limit
 		self.text = text
 		
@@ -21,7 +18,7 @@ class Textbox:
 		return self.text
 	
 	def event(self, event):
-		if Textbox.focused != self and event.type == pygame.MOUSEBUTTONDOWN and event.pos[0] >= self.x and event.pos[0] <= self.x+self.w and event.pos[1] >= self.y and event.pos[1] <= self.y+self.h: Textbox.focused = self
+		if Textbox.focused != self and event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos): Textbox.focused = self
 		elif Textbox.focused == self and event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_BACKSPACE: self.text = self.text[:-1] 
 			elif event.key >= 32 and event.key < 256 and chr(event.key) in string.printable and len(self.text) <= self.limit: self.text += chr(event.key)
@@ -29,7 +26,7 @@ class Textbox:
 	def logic(self):
 		self.text_surf = self.font.render(self.text + ("_" if Textbox.focused == self and self.blinking else ""), True, (255,0,0))
 		self.text_rect = self.text_surf.get_rect()
-		self.text_rect.topleft = (self.x+2, self.y+2)
+		self.text_rect.topleft = (self.rect.x+2, self.rect.y+2)
 	
 		if Textbox.focused == self:
 			self.blink_time += 1
@@ -38,5 +35,5 @@ class Textbox:
 				self.blinking = not self.blinking
 				
 	def draw(self):
-		pygame.draw.rect(self.screen, (255, 255, 0), (self.x, self.y, self.w, self.h), 2)
+		pygame.draw.rect(self.screen, (255, 255, 0), self.rect, 2)
 		self.screen.blit(self.text_surf, self.text_rect)

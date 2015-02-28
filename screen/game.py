@@ -1,8 +1,9 @@
 import pygame, assets, random
 from logic.board import Board
+from object.strip import Strip
 
 class GameScreen:
-	def __init__(self, screen, player_x, player_o, type_x, type_o):
+	def __init__(self, screen, player_x, player_o, type_x, type_o, pic_x, pic_o):
 		self.screen = screen
 		self.font = pygame.font.SysFont(assets.font, 20)
 		big_font = pygame.font.SysFont(assets.font, 120)
@@ -27,11 +28,11 @@ class GameScreen:
 		self.player_o_rect = self.player_o_surf.get_rect()
 		self.player_o_rect.bottomright = (screen.get_width(), screen.get_height())
 		
-		self.player_x_img = self.x.get_image()
+		self.player_x_img = pic_x
 		self.player_x_img_rect = self.player_x_img.get_rect()
 		self.player_x_img_rect.bottomleft = (0, self.player_x_rect.top)
 		
-		self.player_o_img = self.o.get_image()
+		self.player_o_img = pic_o
 		self.player_o_img_rect = self.player_o_img.get_rect()
 		self.player_o_img_rect.bottomright = (screen.get_width(), self.player_o_rect.top)
 		
@@ -41,6 +42,8 @@ class GameScreen:
 						[random.randint(screen.get_width()/2+192-32, screen.get_width()/2+192+32), random.randint(256-32, 256+32)]]
 		self.mark_x = big_font.render("X", True, (255,255,255))
 		self.mark_o = big_font.render("O", True, (255,255,255))
+		
+		self.strip = Strip(screen, "THE GAME IS OVER! Press ENTER to go back to the main menu", (255,0,0))
 		
 		self.locked = False
 		self.text = None
@@ -109,4 +112,4 @@ class GameScreen:
 				mark_rect.topleft = (self.screen.get_width()/2-192+128*j, i*128)
 				self.screen.blit(mark, mark_rect)
 		
-		if not self.turn: self.screen.blit(self.font.render("THE GAME IS OVER! Press ENTER to go back to the main menu", True, (255,255,255), (255,0,0)), (0,self.screen.get_height()/2))
+		if not self.turn: self.strip.draw()

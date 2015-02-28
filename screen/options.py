@@ -2,6 +2,7 @@ import pygame, assets
 from collections import OrderedDict
 from object.textbox import Textbox
 from object.radiogroup import RadioGroup
+from object.button import Button
 from logic.player import HumanPlayer
 from logic.ai import RandomPlayer, BlockingPlayer, SmartPlayer, jon
 from game import GameScreen
@@ -39,14 +40,23 @@ class OptionsScreen:
 		self.player_x_pic_rect = pygame.Rect(20, screen.get_height() - 200, 128, 128)
 		self.player_o_pic_rect = pygame.Rect(screen.get_width()/2+20, screen.get_height() - 200, 128, 128)
 		
+		self.player_x_take_photo = Button(screen, "Take Photo", self.player_x_pic_rect.right+4, self.player_x_pic_rect.y)
+		self.player_x_clear_photo = Button(screen, "Clear Photo", self.player_x_pic_rect.right+4, self.player_x_pic_rect.y + 30)
+		self.player_o_take_photo = Button(screen, "Take Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y)
+		self.player_o_clear_photo = Button(screen, "Clear Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y + 30)
+		
 	def event(self, event):
 		self.player_x_box.event(event)
 		self.player_o_box.event(event)
 		self.player_x_type.event(event)
 		self.player_o_type.event(event)
+		self.player_x_take_photo.event(event)
+		self.player_x_clear_photo.event(event)
+		self.player_o_take_photo.event(event)
+		self.player_o_clear_photo.event(event)
 		
 		if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.player_x_box.get_text() and self.player_o_box.get_text() and self.player_x_type.get_selection() and self.player_o_type.get_selection():
-			return GameScreen(self.screen, self.player_x_box.get_text(), self.player_o_box.get_text(), self.player_x_type.get_selection(), self.player_o_type.get_selection())
+			return GameScreen(self.screen, self.player_x_box.get_text(), self.player_o_box.get_text(), self.player_x_type.get_selection(), self.player_o_type.get_selection(), self.player_x_pic, self.player_o_pic)
 		else: return self
 		
 	def logic(self):
@@ -55,6 +65,9 @@ class OptionsScreen:
 		self.player_o_box.logic()
 		self.player_x_type.logic()
 		self.player_o_type.logic()
+		
+		self.player_x_pic = self.player_x_type.get_selection().get_image()
+		self.player_o_pic = self.player_o_type.get_selection().get_image()
 		
 	def draw(self):
 		self.screen.fill((0,0,0))
@@ -67,5 +80,9 @@ class OptionsScreen:
 		self.player_o_box.draw()
 		self.player_x_type.draw()
 		self.player_o_type.draw()
-		self.screen.blit(self.player_x_type.get_selection().get_image(), self.player_x_pic_rect)
-		self.screen.blit(self.player_o_type.get_selection().get_image(), self.player_o_pic_rect)
+		self.player_x_take_photo.draw()
+		self.player_x_clear_photo.draw()
+		self.player_o_take_photo.draw()
+		self.player_o_clear_photo.draw()
+		self.screen.blit(self.player_x_pic, self.player_x_pic_rect)
+		self.screen.blit(self.player_o_pic, self.player_o_pic_rect)
