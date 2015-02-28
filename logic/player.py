@@ -5,10 +5,17 @@ class Player:
 		self.name = name
 		self.board = board
 	
-	def get_image(self): pass
-	def taunts(self): return True
+	@staticmethod
+	def get_type(): return None
+	
+	@staticmethod
+	def get_image(): pass
+	
+	@staticmethod
+	def taunts(): return True
+	
 	def get_message(self): pass
-	def get_win_text(self): pass
+	def get_win_text(): pass
 	def set_opponent(self, opponent): self.opponent = opponent
 	def event(self, event): pass
 	def logic(self): pass
@@ -17,10 +24,16 @@ class HumanPlayer(Player):
 	def __init__(self, name, board):
 		Player.__init__(self, name, board)
 
-	def get_image(self):
+	@staticmethod
+	def get_type():
+		return "Human Player"
+		
+	@staticmethod
+	def get_image():
 		return assets.human
 	
-	def taunts(self):
+	@staticmethod
+	def taunts():
 		return False
 	
 	def get_message(self):

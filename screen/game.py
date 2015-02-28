@@ -1,14 +1,5 @@
 import pygame, assets, random
-from logic.player import HumanPlayer
-from logic.ai import RandomPlayer, BlockingPlayer, SmartPlayer, jon
 from logic.board import Board
-
-def create_player(type, name, board):
-	if type == 0: return HumanPlayer(name, board)
-	elif type == 1: return RandomPlayer(name, board)
-	elif type == 2: return BlockingPlayer(name, board)
-	elif type == 3: return SmartPlayer(name, board)
-	else: return jon(name, board)
 
 class GameScreen:
 	def __init__(self, screen, player_x, player_o, type_x, type_o):
@@ -22,8 +13,8 @@ class GameScreen:
 		self.type_o = type_o
 		
 		self.board = Board()
-		self.x = create_player(type_x, player_x, self.board)
-		self.o = create_player(type_o, player_o, self.board)
+		self.x = type_x(player_x, self.board)
+		self.o = type_o(player_o, self.board)
 		self.x.set_opponent(self.o)
 		self.o.set_opponent(self.x)
 		self.turn = self.o	#hax

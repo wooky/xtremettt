@@ -8,11 +8,13 @@ class RadioGroup:
 		self.x = x
 		self.y = y
 		self.r = font.size("SAMPLE SIZE")[1] / 2
-		self.selection = selection
 		self.draw_border = draw_border
+		self.args = args
+		
+		self.selection = args.index(selection) if selection else None
 		
 		self.surfs = []
-		for t in args: self.surfs.append(font.render(t, True, (255,255,255)))
+		for t in args: self.surfs.append(font.render(t.get_type(), True, (255,255,255)))
 		
 		self.rects = []
 		for i in range(len(args)):
@@ -21,7 +23,7 @@ class RadioGroup:
 			self.rects.append(r)
 	
 	def get_selection(self):
-		return self.selection
+		return self.args[self.selection]
 	
 	def event(self, event):
 		if event.type == pygame.MOUSEBUTTONDOWN and event.pos[0] >= self.x + 2 and event.pos[0] <= self.x + 2 + self.r*2:

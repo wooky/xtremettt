@@ -1,10 +1,13 @@
 import pygame, assets
+from collections import OrderedDict
 from object.textbox import Textbox
 from object.radiogroup import RadioGroup
+from logic.player import HumanPlayer
+from logic.ai import RandomPlayer, BlockingPlayer, SmartPlayer, jon
 from game import GameScreen
 
 class OptionsScreen:
-	def __init__(self, screen, player_x = "", player_o = "", type_x = 0, type_o = 0):
+	def __init__(self, screen, player_x = "", player_o = "", type_x = None, type_o = None):
 		self.screen = screen
 		
 		font = pygame.font.SysFont(assets.font, 36)
@@ -29,7 +32,7 @@ class OptionsScreen:
 		self.player_x_box = Textbox(screen, 20, self.player_x_rect.bottom + 20, screen.get_width()/2 - 40, 11, player_x)
 		self.player_o_box = Textbox(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 20, screen.get_width()/2 - 40, 11, player_o)
 		
-		types = ["Human Player", "Random Player", "Blocking Player", "Smart Player", "jon"]
+		types = [HumanPlayer, RandomPlayer, BlockingPlayer, SmartPlayer, jon]
 		self.player_x_type = RadioGroup(screen, 20, self.player_x_rect.bottom + 70, type_x, True, types)
 		self.player_o_type = RadioGroup(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 70, type_o, True, types)
 		
@@ -39,7 +42,7 @@ class OptionsScreen:
 		self.player_x_type.event(event)
 		self.player_o_type.event(event)
 		
-		if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.player_x_box.get_text() and self.player_o_box.get_text():
+		if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.player_x_box.get_text() and self.player_o_box.get_text() and self.player_x_type.get_selection() and self.player_o_type.get_selection():
 			return GameScreen(self.screen, self.player_x_box.get_text(), self.player_o_box.get_text(), self.player_x_type.get_selection(), self.player_o_type.get_selection())
 		else: return self
 		

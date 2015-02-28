@@ -44,7 +44,12 @@ class RandomPlayer(Player):
 		Player.__init__(self, name, board)
 		self.taunt = None
 	
-	def get_image(self):
+	@staticmethod
+	def get_type():
+		return "Random Player"
+	
+	@staticmethod
+	def get_image():
 		return assets.random
 	
 	def get_message(self):
@@ -68,7 +73,12 @@ class BlockingPlayer(RandomPlayer):
 		RandomPlayer.__init__(self, name, board)
 		self.taunt = None
 	
-	def get_image(self):
+	@staticmethod
+	def get_type():
+		return "Blocking Player"
+	
+	@staticmethod
+	def get_image():
 		return assets.blocking
 	
 	def get_message(self):
@@ -98,7 +108,12 @@ class SmartPlayer(BlockingPlayer):
 		BlockingPlayer.__init__(self, name, board)
 		self.taunt = None
 	
-	def get_image(self):
+	@staticmethod
+	def get_type():
+		return "Smart Player"
+	
+	@staticmethod
+	def get_image():
 		return assets.smart
 	
 	def get_message(self):
@@ -122,7 +137,12 @@ class jon(RandomPlayer):
 		RandomPlayer.__init__(self, name, board)
 		self.taunt = None
 	
-	def get_image(self):
+	@staticmethod
+	def get_type():
+		return "jon"
+	
+	@staticmethod
+	def get_image():
 		return assets.jon
 	
 	def get_message(self):
