@@ -11,6 +11,9 @@ background = None
 
 font = "Comic Sans MS"
 
+customx = None
+customo = None
+
 def init(screen):
 	global human, random, blocking, smart, jon, background
 	human = pygame.image.load("assets/human.png").convert()
