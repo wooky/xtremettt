@@ -24,14 +24,17 @@ class Query:
 	def send(self):
 		self.request.send(json.dumps(self.commands))
 	
-	def send_with_response(self):
-		self.send()
+	def recv(self):
 		try:
 			self.commands = json.loads(self.request.recv(50000))
 			return True
 		except ValueError:
 			print "[ERROR] An invalid response was received from " + self.address[0] + ":" + str(self.address[1])
 			return False
+	
+	def send_with_response(self):
+		self.send()
+		return self.recv()
 	
 	def get(self, key):
 		return self.commands.get(key)

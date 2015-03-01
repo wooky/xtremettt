@@ -8,11 +8,13 @@ class Server:
 		self.s = GoodServer(("", port), Client)
 		Client.server = self
 		
-		print "Running server on port " + str(port)
-		print "Press CTRL+C to stop server"
+		print "Running server on " + self.get_address()[0] + ":" + str(self.get_address()[1])
 		
 	def run(self):
 		self.s.serve_forever()
+	
+	def get_address(self):
+		return self.s.server_address
 	
 	def connect(self, client):
 		if len(self.clients) >= 2: return False
@@ -34,7 +36,7 @@ class GoodServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
 	# Ctrl-C will cleanly kill all spawned threads
 	daemon_threads = True
 	# much faster rebinding
-	allow_reuse_address = True
+	#allow_reuse_address = True
 	 
 	def __init__(self, server_address, RequestHandlerClass):
 		SocketServer.TCPServer.__init__(self, server_address, RequestHandlerClass) 

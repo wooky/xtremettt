@@ -1,6 +1,7 @@
-import pygame, assets
+import pygame, assets, thread
 from screen.title import TitleScreen
 from screen.exit import WussScreen
+from server.server import Server
 
 pygame.font.init()
 
@@ -10,10 +11,13 @@ pygame.display.set_caption("Super Extreme Tic-Tac-Toe")
 
 assets.init(screen)
 font = pygame.font.SysFont(assets.font, 16)
-white = pygame.Color("white")
-black = pygame.Color("black")
+white = (255,255,255)
+black = (0,0,0)
 
 clock = pygame.time.Clock()
+
+server = Server(0)
+thread.start_new_thread(server.run, ())
 
 currentScreen = TitleScreen(screen)
 

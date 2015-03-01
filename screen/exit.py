@@ -2,6 +2,9 @@
 
 class WussScreen:
 	def __init__(self, screen):
+		from logic.main import server
+		server.shutdown()
+	
 		self.screen = screen
 		ayy = u"""	░░░░░░▄▀▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒█
 					░░░░█▒▒▄▀▀▀▀▀▄▄▒▒▒▒▒▒▒▒▒▄▄▀▀▀▀▀▀▄
