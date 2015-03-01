@@ -21,7 +21,7 @@ class Textbox:
 		if Textbox.focused != self and event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos): Textbox.focused = self
 		elif Textbox.focused == self and event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_BACKSPACE: self.text = self.text[:-1] 
-			elif event.key >= 32 and event.key < 256 and chr(event.key) in string.printable and len(self.text) <= self.limit: self.text += chr(event.key)
+			elif event.key >= 32 and event.key < 256 and chr(event.key) in string.printable and len(self.text) < self.limit: self.text += chr(event.key)
 			
 	def logic(self):
 		self.text_surf = self.font.render(self.text + ("_" if Textbox.focused == self and self.blinking else ""), True, (255,0,0))
