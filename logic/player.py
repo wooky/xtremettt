@@ -30,7 +30,7 @@ class HumanPlayer(Player):
 		
 	@staticmethod
 	def get_image():
-		return assets.human
+		return assets.pic['human']
 	
 	@staticmethod
 	def taunts():

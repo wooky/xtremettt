@@ -50,7 +50,7 @@ class RandomPlayer(Player):
 	
 	@staticmethod
 	def get_image():
-		return assets.random
+		return assets.pic['random']
 	
 	def get_message(self):
 		if not self.taunt: self.taunt = random.choice(RandomPlayer.texts)
@@ -79,7 +79,7 @@ class BlockingPlayer(RandomPlayer):
 	
 	@staticmethod
 	def get_image():
-		return assets.blocking
+		return assets.pic['blocking']
 	
 	def get_message(self):
 		if not self.taunt: self.taunt = random.choice(BlockingPlayer.texts)
@@ -114,7 +114,7 @@ class SmartPlayer(BlockingPlayer):
 	
 	@staticmethod
 	def get_image():
-		return assets.smart
+		return assets.pic['smart']
 	
 	def get_message(self):
 		if not self.taunt: self.taunt = random.choice(SmartPlayer.texts)
@@ -143,7 +143,7 @@ class jon(RandomPlayer):
 	
 	@staticmethod
 	def get_image():
-		return assets.jon
+		return assets.pic['jon']
 	
 	def get_message(self):
 		if not self.taunt: self.taunt = "a" + "y"*random.randint(2,20) + " lmao     "

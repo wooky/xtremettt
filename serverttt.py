@@ -1,12 +1,10 @@
-from server.server import *
+from server.server import Server
 PORT = 10101
 
 if __name__ == "__main__":
-	s = GoodServer(("", PORT), Server)
-	print "Running server on port " + str(PORT)
+	s = Server(PORT)
 	try:
-		s.serve_forever()
+		s.run()
 	except KeyboardInterrupt:
-		print "Shutting down server..."
 		s.shutdown()
 	

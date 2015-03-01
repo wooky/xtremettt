@@ -1,39 +1,33 @@
 import SocketServer
+from client import Client
 
-class Server(SocketServer.BaseRequestHandler):
-	clients = 0
+class Server:
+	def __init__(self, port):
+		self.clients = []
 	
-	def setup(self):
-		print "Received connection from " + self.client_address[0] + ":" + str(self.client_address[1])
-		self.lost = False
-		self.shutdown = False
+		self.s = GoodServer(("", port), Client)
+		Client.server = self
 		
-		if Server.clients > 1:
-			print "Server is full!"
-			self.request.send("Server is full!")
-			self.request.close()
-			self.shutdown = True
-		else:
-			Server.clients += 1
+		print "Running server on port " + str(port)
+		print "Press CTRL+C to stop server"
+		
+	def run(self):
+		self.s.serve_forever()
 	
-	def handle(self):
-		while(not self.shutdown):
-			l = self.request.recv(512)
-			if not l:
-				self.lost = True
-				break
-			elif l.strip() == "QUIT": break
-			self.request.send(l)
+	def connect(self, client):
+		if len(self.clients) >= 2: return False
+		
+		self.clients.append(client)
+		return True
 	
-	def finish(self):
-		if self.lost:
-			print "Lost connection from " + self.client_address[0] + ":" + str(self.client_address[1])
-			Server.clients -= 1
-		else:
-			if not self.shutdown:
-				self.request.send("y... you too\r\n")
-				Server.clients -= 1
-			print "Closed connection from " + self.client_address[0] + ":" + str(self.client_address[1])
+	def disconnect(self, client):
+		try:
+			self.clients.remove(client)
+		except ValueError: pass
+		
+	def shutdown(self):
+		print "Shutting down server..."
+		self.s.shutdown()
 
 #Stolen from https://gist.github.com/pklaus/c4c37152e261a9e9331f god bless			
 class GoodServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
