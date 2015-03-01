@@ -9,7 +9,7 @@ from camoverlay import CamOverlay
 from game import GameScreen
 
 class OptionsScreen:
-	def __init__(self, screen, player_x = "", player_o = "", type_x = HumanPlayer, type_o = HumanPlayer):
+	def __init__(self, screen, player_x = "", player_o = "", type_x = HumanPlayer, type_o = HumanPlayer, online = False):
 		self.screen = screen
 		
 		font = pygame.font.SysFont(assets.font, 36)
@@ -46,6 +46,8 @@ class OptionsScreen:
 		self.player_o_take_photo = Button(screen, "Take Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y)
 		self.player_o_clear_photo = Button(screen, "Clear Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y + 30)
 		
+		self.local = RadioGroup(screen, screen.get_width()/2+152, screen.get_height()*3/4, online, True, (False, "Offline Play"), (True, "Online Play"))
+		
 		self.next_screen = self
 		
 	def event(self, event):
@@ -53,6 +55,7 @@ class OptionsScreen:
 		self.player_o_box.event(event)
 		self.player_x_type.event(event)
 		self.player_o_type.event(event)
+		self.local.event(event)
 		self.player_x_take_photo.event(event)
 		self.player_x_clear_photo.event(event)
 		self.player_o_take_photo.event(event)
@@ -68,6 +71,7 @@ class OptionsScreen:
 		self.player_o_box.logic()
 		self.player_x_type.logic()
 		self.player_o_type.logic()
+		self.local.logic()
 		
 		if self.player_x_clear_photo.is_pressed(): assets.custom['x'] = None
 		elif self.player_x_take_photo.is_pressed():
@@ -90,6 +94,7 @@ class OptionsScreen:
 		self.player_o_box.draw()
 		self.player_x_type.draw()
 		self.player_o_type.draw()
+		self.local.draw()
 		self.player_x_take_photo.draw()
 		self.player_x_clear_photo.draw()
 		self.player_o_take_photo.draw()
