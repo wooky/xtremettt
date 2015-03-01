@@ -22,7 +22,7 @@ class Button:
 	def is_pressed(self):
 		if not self.pressed: return False
 		self.pressed = False
-		self.pressed = True
+		return True
 	
 	def event(self, event):
 		if self.enabled and event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos): self.pressed = True

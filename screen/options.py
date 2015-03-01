@@ -5,6 +5,7 @@ from object.radiogroup import RadioGroup
 from object.button import Button
 from logic.player import HumanPlayer
 from logic.ai import RandomPlayer, BlockingPlayer, SmartPlayer, jon
+from camoverlay import CamOverlay
 from game import GameScreen
 
 class OptionsScreen:
@@ -45,6 +46,8 @@ class OptionsScreen:
 		self.player_o_take_photo = Button(screen, "Take Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y)
 		self.player_o_clear_photo = Button(screen, "Clear Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y + 30)
 		
+		self.next_screen = self
+		
 	def event(self, event):
 		self.player_x_box.event(event)
 		self.player_o_box.event(event)
@@ -57,7 +60,7 @@ class OptionsScreen:
 		
 		if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.player_x_box.get_text() and self.player_o_box.get_text() and self.player_x_type.get_selection() and self.player_o_type.get_selection():
 			return GameScreen(self.screen, self.player_x_box.get_text(), self.player_o_box.get_text(), self.player_x_type.get_selection(), self.player_o_type.get_selection(), self.player_x_pic, self.player_o_pic)
-		else: return self
+		else: return self.next_screen
 		
 	def logic(self):
 		assets.background.logic()
@@ -66,8 +69,15 @@ class OptionsScreen:
 		self.player_x_type.logic()
 		self.player_o_type.logic()
 		
-		self.player_x_pic = self.player_x_type.get_selection().get_image()
-		self.player_o_pic = self.player_o_type.get_selection().get_image()
+		if self.player_x_clear_photo.is_pressed(): assets.custom['x'] = None
+		elif self.player_x_take_photo.is_pressed():
+			self.next_screen = CamOverlay(self.screen, (self.player_x_box.get_text(), self.player_o_box.get_text(), self.player_x_type.get_selection(), self.player_o_type.get_selection()), assets.custom, 'x')
+		elif self.player_o_clear_photo.is_pressed(): assets.custom['o'] = None
+		elif self.player_o_take_photo.is_pressed():
+			self.next_screen = CamOverlay(self.screen, (self.player_x_box.get_text(), self.player_o_box.get_text(), self.player_x_type.get_selection(), self.player_o_type.get_selection()), assets.custom, 'o')
+		
+		self.player_x_pic = assets.custom['x'] if assets.custom['x'] else self.player_x_type.get_selection().get_image()
+		self.player_o_pic = assets.custom['o'] if assets.custom['o'] else self.player_o_type.get_selection().get_image()
 		
 	def draw(self):
 		self.screen.fill((0,0,0))

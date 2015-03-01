@@ -2,7 +2,6 @@ import pygame, assets
 from screen.title import TitleScreen
 from screen.exit import WussScreen
 
-pygame.display.init()
 pygame.font.init()
 
 size = width, height = 640, 480
@@ -25,7 +24,7 @@ while 1:
 	
 	currentScreen.logic()
 	
-	fps = font.render(str(int(clock.get_fps())) + " FPS", True, white)
+	fps = font.render(str(int(clock.get_fps())) + " FPS", True, white, black)
 	fps_rect = fps.get_rect()
 	fps_rect.topright = (width, 0)
 	

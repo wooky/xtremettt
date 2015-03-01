@@ -11,8 +11,7 @@ background = None
 
 font = "Comic Sans MS"
 
-customx = None
-customo = None
+custom = {'x': None, 'o': None}
 
 def init(screen):
 	global human, random, blocking, smart, jon, background
