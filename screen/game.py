@@ -3,11 +3,12 @@ from logic.board import Board
 from object.strip import Strip
 
 class GameScreen:
-	def __init__(self, screen, player_x, player_o, type_x, type_o, pic_x, pic_o):
+	def __init__(self, screen, online, player_x, player_o, type_x, type_o, pic_x, pic_o):
 		self.screen = screen
 		self.font = pygame.font.SysFont(assets.font, 20)
 		big_font = pygame.font.SysFont(assets.font, 120)
 		
+		self.online = online
 		self.player_x = player_x
 		self.player_o = player_o
 		self.type_x = type_x
@@ -53,7 +54,7 @@ class GameScreen:
 			if not self.locked: self.turn.event(event)
 		elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
 			from options import OptionsScreen
-			return OptionsScreen(self.screen, self.player_x, self.player_o, self.type_x, self.type_o)
+			return OptionsScreen(self.screen, self.online, self.player_x, self.type_x, (self.player_o, self.type_o))
 		return self
 	
 	def logic(self):
