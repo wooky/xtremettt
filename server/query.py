@@ -8,7 +8,6 @@ class Query:
 	NAME = "name"
 	TYPE = "type"
 	PIC = "pic"
-	ASSET = "ass"
 	
 	DISCONNECT = "bye"
 

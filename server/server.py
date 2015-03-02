@@ -1,5 +1,6 @@
-import SocketServer
+import SocketServer, thread
 from client import Client
+from serverboard import ServerBoard
 
 class Server:
 	def __init__(self, port):
@@ -20,6 +21,9 @@ class Server:
 		if len(self.clients) >= 2: return False
 		
 		self.clients.append(client)
+		if len(self.clients) == 2:
+			for c in self.clients: c.play()
+			thread.start_new_thread(ServerBoard, self.clients)
 		return True
 	
 	def disconnect(self, client):
