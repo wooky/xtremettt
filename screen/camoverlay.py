@@ -43,13 +43,12 @@ class CamOverlay:
 	def logic(self):
 		img = self.camera.get_image()
 		img_rect = img.get_rect()
-		img_rect.center = self.rect.center
 		
 		self.pic = pygame.Surface((128, 128))
 		self.pic_rect = self.pic.get_rect()
 		self.pic_rect.center = self.rect.center
 		
-		self.pic.blit(img, img_rect, self.pic_rect)
+		self.pic.blit(img, img_rect, (img_rect.width/2-64,img_rect.height/2-64,128,128))
 	
 	def draw(self):
 		if self.strip:
