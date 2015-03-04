@@ -24,17 +24,19 @@ class Client(SocketServer.BaseRequestHandler):
 		
 		if not Client.server.connect(self):
 			print "Kicking " + self.client_address[0] + ":" + str(self.client_address[1]) + " due to full server"
-			Query(self.request, None, {Query.FULL: True}).send()
+			Query(self.request, None, {Query.STRIP: "Server is Full", Query.COLOR: (255,0,0)}).send()
 			self.shutdown = True
+			return
 		
 		while self.waiting: pass
 	
 	def handle(self):
 		if self.shutdown: return
 		
+		self.waiting = True
+		while self.waiting: pass
 		
-		
-		Query(self.request, None, {Query.STRIP: "Hello, " + self.name + " of type " + self.type + "!"}).send()
+		#Query(self.request, None, {Query.STRIP: "Hello, " + self.name + " of type " + self.type + "!"}).send()
 	
 	def finish(self):
 		if not self.shutdown:

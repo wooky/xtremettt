@@ -23,7 +23,7 @@ class Server:
 		self.clients.append(client)
 		if len(self.clients) == 2:
 			for c in self.clients: c.play()
-			thread.start_new_thread(ServerBoard, self.clients)
+			thread.start_new_thread(ServerBoard, (self.clients,))
 		return True
 	
 	def disconnect(self, client):

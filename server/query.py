@@ -2,8 +2,9 @@ import json
 
 class Query:
 	AUTH = "auth"
-	FULL = "full"
+	
 	STRIP = "strip"
+	COLOR = "col"
 	
 	NAME = "name"
 	TYPE = "type"
