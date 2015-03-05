@@ -26,7 +26,9 @@ class TitleScreen:
 		self.start_rect.center = (self.title_shadow_rect.centerx, (self.title_rect.bottom + screen.get_height())/2)
 				
 	def event(self, event):
-		if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN: return OptionsScreen(self.screen)
+		if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+			OptionsScreen.instance = OptionsScreen(self.screen)
+			return OptionsScreen.instance
 		else: return self
 	
 	def logic(self):
