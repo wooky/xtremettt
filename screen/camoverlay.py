@@ -2,10 +2,9 @@ import pygame, pygame.camera, assets
 from object.strip import Strip
 
 class CamOverlay:
-	def __init__(self, screen, otherargs, var, val):
+	def __init__(self, screen, var, val):
 		pygame.camera.init()
 		self.screen = screen
-		self.otherargs = otherargs
 		
 		self.strip = None
 		camlist = pygame.camera.list_cameras()
@@ -36,7 +35,7 @@ class CamOverlay:
 				self.camera.stop()
 				pygame.camera.quit()
 			from options import OptionsScreen
-			return OptionsScreen(self.screen, *self.otherargs)
+			return OptionsScreen.instance
 		
 		return self
 	
