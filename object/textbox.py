@@ -29,10 +29,10 @@ class Textbox:
 		self.text_rect.topleft = (self.rect.x+2, self.rect.y+2)
 		
 		if self.text_rect.width > self.rect.width:
-			self.text_rect.right = self.rect.right
-			self.text_rect.size = self.rect.size
-			s = pygame.Surface((self.rect.width-4, self.rect.height-4))
-			s.blit(self.text_surf, self.text_rect, (self.text_rect.width-self.rect.width, self.text_rect.height-self.rect.height, self.rect.width, self.rect.height))
+			r = pygame.Rect(self.text_rect.width-self.rect.width, 0, self.rect.width, self.rect.height)
+			s = pygame.Surface((self.rect.width-3, self.rect.height-3))
+			s.blit(self.text_surf, (0,0), r)
+			
 			self.text_surf = s
 	
 		if Textbox.focused == self:
