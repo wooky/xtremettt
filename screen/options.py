@@ -34,8 +34,8 @@ class OptionsScreen:
 		self.footer_rect = self.footer.get_rect()
 		self.footer_rect.midbottom = (screen.get_width()/2, screen.get_height()-10)
 		
-		self.player_x_box = Textbox(screen, 20, self.player_x_rect.bottom + 20, screen.get_width()/2 - 40, 11)
-		self.player_o_box = Textbox(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 20, screen.get_width()/2 - 40, 11)
+		self.player_x_box = Textbox(screen, 20, self.player_x_rect.bottom + 20, screen.get_width()/2 - 40)
+		self.player_o_box = Textbox(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 20, screen.get_width()/2 - 40)
 		
 		types = ((HumanPlayer, HumanPlayer.get_type()), (RandomPlayer, RandomPlayer.get_type()), (BlockingPlayer, BlockingPlayer.get_type()), (SmartPlayer, SmartPlayer.get_type()), (jon, jon.get_type()))
 		self.player_x_type = RadioGroup(screen, 20, self.player_x_rect.bottom + 70, types[0][0], True, *types)
