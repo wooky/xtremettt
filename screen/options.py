@@ -38,8 +38,8 @@ class OptionsScreen:
 		self.player_o_box = Textbox(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 20, screen.get_width()/2 - 40)
 		
 		types = ((HumanPlayer, HumanPlayer.get_type()), (RandomPlayer, RandomPlayer.get_type()), (BlockingPlayer, BlockingPlayer.get_type()), (SmartPlayer, SmartPlayer.get_type()), (jon, jon.get_type()))
-		self.player_x_type = RadioGroup(screen, 20, self.player_x_rect.bottom + 70, types[0][0], True, *types)
-		self.player_o_type = RadioGroup(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 70, types[0][0], True, *types)
+		self.player_x_type = RadioGroup(screen, 20, self.player_x_rect.bottom + 70, types[0][0], *types)
+		self.player_o_type = RadioGroup(screen, screen.get_width()/2 + 20, self.player_o_rect.bottom + 70, types[0][0], *types)
 		
 		self.player_x_pic_rect = pygame.Rect(20, screen.get_height() - 200, 128, 128)
 		self.player_o_pic_rect = pygame.Rect(screen.get_width()/2+20, screen.get_height() - 200, 128, 128)
@@ -49,7 +49,7 @@ class OptionsScreen:
 		self.player_o_take_photo = Button(screen, "Take Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y)
 		self.player_o_clear_photo = Button(screen, "Clear Photo", self.player_o_pic_rect.right+4, self.player_o_pic_rect.y + 30)
 		
-		self.local = RadioGroup(screen, screen.get_width()/2+152, screen.get_height()*3/4, self.online, True, (False, "Offline Play"), (True, "Online Play"))
+		self.local = RadioGroup(screen, screen.get_width()/2+152, screen.get_height()*3/4, self.online, (False, "Offline Play"), (True, "Online Play"))
 		
 		#TODO: add multiplayer elements here
 		

@@ -1,6 +1,7 @@
 import pygame, assets, random
 from logic.board import Board
 from object.strip import Strip
+from object.textbox import Textbox
 
 class GameScreen:
 	def __init__(self, screen, player_x, player_o, type_x, type_o, pic_x, pic_o):
@@ -15,21 +16,21 @@ class GameScreen:
 		self.o.set_opponent(self.x)
 		self.turn = self.o	#hax
 		
-		self.player_x_surf = self.font.render(player_x, True, (255,255,255))
+		self.player_x_surf = pygame.transform.rotate(self.font.render(player_x, True, (255,255,255)), 90)
 		self.player_x_rect = self.player_x_surf.get_rect()
 		self.player_x_rect.bottomleft = (0, screen.get_height())
 		
-		self.player_o_surf = self.font.render(player_o, True, (255,255,255))
+		self.player_o_surf = pygame.transform.rotate(self.font.render(player_o, True, (255,255,255)), -90)
 		self.player_o_rect = self.player_o_surf.get_rect()
 		self.player_o_rect.bottomright = (screen.get_width(), screen.get_height())
 		
 		self.player_x_img = pic_x
 		self.player_x_img_rect = self.player_x_img.get_rect()
-		self.player_x_img_rect.bottomleft = (0, self.player_x_rect.top)
+		self.player_x_img_rect.bottomleft = (self.player_x_rect.right, screen.get_height())
 		
 		self.player_o_img = pic_o
 		self.player_o_img_rect = self.player_o_img.get_rect()
-		self.player_o_img_rect.bottomright = (screen.get_width(), self.player_o_rect.top)
+		self.player_o_img_rect.bottomright = (self.player_o_rect.left, screen.get_height())
 		
 		self.lines = [	[random.randint(screen.get_width()/2-64-32, screen.get_width()/2-64+32), random.randint(384-32, 128*3+32)],
 						[random.randint(screen.get_width()/2+64-32, screen.get_width()/2+64+32), random.randint(384-32, 128*3+32)],
@@ -38,10 +39,11 @@ class GameScreen:
 		self.mark_x = big_font.render("X", True, (255,255,255))
 		self.mark_o = big_font.render("O", True, (255,255,255))
 		
+		self.text = Textbox(screen, self.player_x_img_rect.right+20, self.screen.get_height()-40, self.player_o_img_rect.left-self.player_x_img_rect.right-40, 0, "", False)
+		
 		self.strip = Strip(screen, "THE GAME IS OVER! Press ENTER to go back to the main menu", (255,0,0))
 		
 		self.locked = False
-		self.text = None
 	
 	def event(self, event):
 		if self.turn:
@@ -80,7 +82,8 @@ class GameScreen:
 				if len(msg) == len(self.turn.get_message()): self.locked = False
 		elif self.turn: self.turn.logic()
 		
-		if msg != None: self.text = self.font.render(msg, True, (255,255,255))
+		if msg != None: self.text.set_text(msg)
+		self.text.logic()
 		
 	def draw(self):
 		self.screen.fill((0,0,0))
@@ -93,8 +96,7 @@ class GameScreen:
 		self.screen.blit(self.player_o_img, self.player_o_img_rect)
 		self.screen.blit(self.player_x_surf, self.player_x_rect)
 		self.screen.blit(self.player_o_surf, self.player_o_rect)
-		r = pygame.draw.rect(self.screen, (255,255,255), (self.player_x_img_rect.right+20, self.screen.get_height()-40, self.player_o_img_rect.left-self.player_x_img_rect.right-40, 30), 2)
-		if self.text: self.screen.blit(self.text, r)
+		self.text.draw()
 		
 		b = self.board.get_board()
 		for i in range(len(b)):

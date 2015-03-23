@@ -1,14 +1,13 @@
 import pygame, assets
 
 class RadioGroup:
-	def __init__(self, screen, x, y, selection, draw_border, *args):
+	def __init__(self, screen, x, y, selection, *args):
 		font = pygame.font.SysFont(assets.font, 16)
 		
 		self.screen = screen
 		self.x = x
 		self.y = y
 		self.r = font.size("SAMPLE SIZE")[1] / 2
-		self.draw_border = draw_border
 		self.args = args
 		
 		self.selection = selection
