@@ -35,10 +35,7 @@ def cause_victory(board, player, row, col):
 	return False
 
 class RandomPlayer(Player):
-	texts = [	"ummmmmm     ",
-				"I guess this'll work     ",
-				"I'm not sure     ",
-				"sdfljdfjhdfjh     "]
+	texts = [""]
 
 	def __init__(self, name, board):
 		Player.__init__(self, name, board)
@@ -55,19 +52,13 @@ class RandomPlayer(Player):
 	def get_message(self):
 		if not self.taunt: self.taunt = random.choice(RandomPlayer.texts)
 		return self.taunt
-	
-	def get_win_text(self):
-		return "i has winned???"
 		
 	def logic(self):
 		while not self.board.put_mark(self, random.randint(0,2), random.randint(0,2)): pass
 		self.taunt = None
 		
 class BlockingPlayer(RandomPlayer):
-	texts = [	"u wot m8     ",
-				"u havin a giggle m8     ",
-				"ill bash yor fockin head in     ",
-				"i swer on me mum     "]
+	texts = [""]
 	
 	def __init__(self, name, board):
 		RandomPlayer.__init__(self, name, board)
@@ -85,9 +76,6 @@ class BlockingPlayer(RandomPlayer):
 		if not self.taunt: self.taunt = random.choice(BlockingPlayer.texts)
 		return self.taunt
 	
-	def get_win_text(self):
-		return "Yeah, you like that, you retard?"
-	
 	def logic(self):
 		for i in range(3):
 			for j in range(3):
@@ -98,11 +86,7 @@ class BlockingPlayer(RandomPlayer):
 		RandomPlayer.logic(self)
 		
 class SmartPlayer(BlockingPlayer):
-	texts = [	"you can't defeat me     ",
-				"I am unstoppable     ",
-				"you're gonna get #rekt son     ",
-				"give up now     ",
-				"pansy     "]
+	texts = [""]
 	
 	def __init__(self, name, board):
 		BlockingPlayer.__init__(self, name, board)
@@ -119,9 +103,6 @@ class SmartPlayer(BlockingPlayer):
 	def get_message(self):
 		if not self.taunt: self.taunt = random.choice(SmartPlayer.texts)
 		return self.taunt
-	
-	def get_win_text(self):
-		return "Kneel down before " + self.name
 	
 	def logic(self):
 		for i in range(3):
@@ -146,11 +127,7 @@ class jon(RandomPlayer):
 		return assets.jon
 	
 	def get_message(self):
-		if not self.taunt: self.taunt = "a" + "y"*random.randint(2,20) + " lmao     "
-		return self.taunt
-	
-	def get_win_text(self):
-		return "ayy what the fuck lmao"
+		return ""
 	
 	def logic(self):
 		for i in range(3):

@@ -1,6 +1,5 @@
-import pygame, assets
+import pygame, assets, sys
 from screen.title import TitleScreen
-from screen.exit import WussScreen
 
 pygame.font.init()
 
@@ -19,7 +18,7 @@ currentScreen = TitleScreen(screen)
 
 while 1:
 	for event in pygame.event.get():
-		if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): currentScreen = WussScreen(screen)
+		if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): sys.exit()
 		currentScreen = currentScreen.event(event)
 	
 	currentScreen.logic()

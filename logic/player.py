@@ -15,7 +15,7 @@ class Player:
 	def taunts(): return True
 	
 	def get_message(self): pass
-	def get_win_text(): pass
+	def get_win_text(self): return self.name + " is winner!!!"
 	def set_opponent(self, opponent): self.opponent = opponent
 	def event(self, event): pass
 	def logic(self): pass
@@ -38,9 +38,6 @@ class HumanPlayer(Player):
 	
 	def get_message(self):
 		return self.name + ", it's your turn!"
-	
-	def get_win_text(self):
-		return self.name + " is winner!!!"
 	
 	def event(self, event):
 		if event.type == pygame.MOUSEBUTTONDOWN: self.board.put_mark(self, event.pos[1]/128, (event.pos[0] - pygame.display.Info().current_w/2 + 192)/128)
