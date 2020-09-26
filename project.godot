@@ -15,7 +15,12 @@ _global_script_class_icons={
 
 [application]
 
-config/name="XtremeTTT"
+config/name="Super Extreme Tic-Tac-Toe Deluxe Edition"
+run/main_scene="res://scene/top_level.tscn"
+
+[autoload]
+
+ProfileManager="*res://profile/profile_manager.gd"
 
 [rendering]
 

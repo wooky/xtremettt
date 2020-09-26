@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/top_level.gd" type="Script" id=1]
+[ext_resource path="res://scene/splash.tscn" type="PackedScene" id=2]
+
+[node name="TopLevel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Splash" parent="." instance=ExtResource( 2 )]
+[connection signal="splash_finished" from="Splash" to="." method="_on_Splash_splash_finished"]

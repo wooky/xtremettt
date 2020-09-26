@@ -1,0 +1,149 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://board/ttt_grid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/splash.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=5]
+resource_name = "borf"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera:environment")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.5, 2.5 ), Vector3( 2.5, 1.5, 0 ), Vector3( 0, 1.5, -2.5 ), Vector3( -2.5, 1.5, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 90, 0 ), Vector3( 0, 180, 0 ), Vector3( 0, 270, 0 ), Vector3( 0, 360, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:custom_styles/panel:bg_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.6, 0.6, 0.6, 0 ) ]
+}
+
+[sub_resource type="ProceduralSky" id=2]
+sky_top_color = Color( 0.921569, 0.160784, 0.356863, 1 )
+sky_horizon_color = Color( 0.14902, 0.486275, 0.756863, 1 )
+ground_bottom_color = Color( 0.0745098, 0.0666667, 0.913725, 1 )
+ground_horizon_color = Color( 0.266667, 0.780392, 0.207843, 1 )
+sun_color = Color( 0.831373, 0.913725, 0.0784314, 1 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+background_color = Color( 0.85098, 0.882353, 0.0901961, 1 )
+ambient_light_color = Color( 0.807843, 0.901961, 0.0627451, 1 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "swoosh"
+length = 3.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.25, 2.5, 2.75, 3, 3.25, 3.5 ),
+"transitions": PoolRealArray( 1, 0, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 9.413, 3.776, 0.604 ), Vector3( -3.172, 3.776, 0.604 ), Vector3( 0, 1.5, 2.5 ), Vector3( 0, 1.5, 2.5 ), Vector3( 2, 1.5, 0 ), Vector3( 0, 1.5, -1.5 ), Vector3( -1, 1.5, 0 ), Vector3( 0, 1.5, 0.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.25, 2.25, 2.5, 2.75, 3, 3.25, 3.5 ),
+"transitions": PoolRealArray( 0, 1, 0, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -42.2883, 28.8716, -6.69512 ), Vector3( 0, 90, 0 ), Vector3( 0, -90, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 90, 0 ), Vector3( 0, 180, 0 ), Vector3( 0, 270, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:custom_styles/panel:bg_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3.25, 3.5 ),
+"transitions": PoolRealArray( 0, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.6, 0.6, 0.6, 0 ), Color( 0.6, 0.6, 0.6, 0 ), Color( 0.6, 0.6, 0.6, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Camera:environment")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 3 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="Splash" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="TTTGrid" parent="." instance=ExtResource( 1 )]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2.5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "swoosh"
+anims/borf = SubResource( 5 )
+anims/swoosh = SubResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,0 +1,193 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://ComicNeue-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scene/title.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=4]
+size = 120
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 1, 0, 0, 1, 0.964706, 0.0705882, 0.490196, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = SubResource( 9 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=12]
+colors = PoolColorArray( 0.0196078, 1, 0, 1, 0.00392157, 0.254902, 0.105882, 1 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+
+[sub_resource type="StyleBoxTexture" id=14]
+texture = SubResource( 13 )
+region_rect = Rect2( 0, 0, 2048, 1 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "deluxe"
+length = 1.5
+step = 0.25
+
+[sub_resource type="Animation" id=2]
+resource_name = "detrans"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:custom_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 3 ),
+"transitions": PoolRealArray( 0, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.6, 0.6, 0.6, 1 ), Color( 0.6, 0.6, 0.6, 1 ), Color( 0.6, 0.6, 0.6, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "deluxe"
+length = 1.5
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label3:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0, 1, 1 ), Color( 1, 0, 1, 1 ) ]
+}
+
+[node name="Title" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+margin_top = 60.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 4 )
+text = "TIC-TAC-TOE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 7.0
+margin_top = 23.0
+margin_right = 380.0
+margin_bottom = 79.0
+custom_fonts/font = SubResource( 5 )
+text = "Extreme Supreme"
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 790.0
+margin_top = 198.0
+margin_right = 968.0
+margin_bottom = 254.0
+rect_rotation = -30.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "DELUXE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SinglePlayer" type="Button" parent="."]
+margin_left = 69.0
+margin_top = 276.0
+margin_right = 343.0
+margin_bottom = 394.0
+custom_styles/normal = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
+text = "Single Player"
+
+[node name="Multiplayer" type="Button" parent="."]
+margin_left = 635.0
+margin_top = 279.0
+margin_right = 903.0
+margin_bottom = 393.0
+custom_styles/normal = SubResource( 14 )
+custom_fonts/font = SubResource( 15 )
+text = "Multiplayer"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Profiles" type="Button" parent="."]
+margin_left = 470.0
+margin_top = 513.0
+margin_right = 530.0
+margin_bottom = 533.0
+text = "Profiles"
+
+[node name="Label4" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+text = "Copyright (c) 2015-2020 Yakov Lipkovich. Licensed under WTFPL."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoProfilesDialog" type="AcceptDialog" parent="."]
+margin_left = 411.0
+margin_top = 241.0
+margin_right = 616.0
+margin_bottom = 299.0
+popup_exclusive = true
+window_title = "Stop"
+dialog_text = "You must first create a profile"
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "detrans"
+anims/deluxe = SubResource( 3 )
+anims/detrans = SubResource( 2 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+autoplay = "deluxe"
+anims/deluxe = SubResource( 7 )
+[connection signal="pressed" from="SinglePlayer" to="." method="_on_SinglePlayer_pressed"]
+[connection signal="pressed" from="Multiplayer" to="." method="_on_Multiplayer_pressed"]
