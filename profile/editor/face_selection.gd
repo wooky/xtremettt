@@ -1,6 +1,8 @@
 extends Panel
 class_name FaceSelection
 
+signal selection_changed
+
 var _image_size: Vector2
 var _dragging_bounds: Rect2
 var _handle_dragged = null
@@ -103,3 +105,4 @@ func _update_rect(rect: Rect2) -> void:
 			self._dragging_bounds.encloses(rect):
 		self.rect_position = rect.position
 		self.rect_size = rect.size
+		emit_signal("selection_changed")

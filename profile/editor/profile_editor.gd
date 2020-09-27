@@ -31,5 +31,5 @@ func _on_ClearFaceTexture_pressed() -> void:
 	$FaceTextureEditor.clear_texture()
 	$Container/ProfileMugshot.personification.clear_face_texture()
 
-func _on_FaceTextureEditor_texture_changed(texture: Texture) -> void:
-	$Container/ProfileMugshot.personification.update_face_texture(texture)
+func _on_FaceTextureEditor_image_changed(image: Image) -> void:
+	$Container/ProfileMugshot.personification.update_face_image(image)

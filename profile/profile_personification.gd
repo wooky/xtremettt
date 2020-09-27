@@ -17,11 +17,12 @@ func load_from_profile(profile: Profile) -> void:
 func update_body_color(color: Color) -> void:
 	self._body_material.albedo_color = color
 
-func update_face_texture(texture: Texture) -> void:
+func update_face_image(image: Image) -> void:
 	if self._face_material == null:
 		self._face_material = SpatialMaterial.new()
+		self._face_material.albedo_texture = ImageTexture.new()
 		self._face.set_surface_material(0, self._face_material)
-	self._face_material.albedo_texture = texture
+	(self._face_material.albedo_texture as ImageTexture).create_from_image(image)
 
 func clear_face_texture() -> void:
 	self._face.set_surface_material(0, self._body_material)

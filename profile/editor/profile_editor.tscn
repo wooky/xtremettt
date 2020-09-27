@@ -141,4 +141,4 @@ __meta__ = {
 [connection signal="color_changed" from="Container/BodyColor" to="." method="_on_BodyColor_color_changed"]
 [connection signal="pressed" from="Container/EditFaceTexture" to="." method="_on_EditFaceTexture_pressed"]
 [connection signal="pressed" from="Container/ClearFaceTexture" to="." method="_on_ClearFaceTexture_pressed"]
-[connection signal="texture_changed" from="FaceTextureEditor" to="." method="_on_FaceTextureEditor_texture_changed"]
+[connection signal="image_changed" from="FaceTextureEditor" to="." method="_on_FaceTextureEditor_image_changed"]
