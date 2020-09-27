@@ -13,3 +13,6 @@ func _ready() -> void:
 
 func has_profiles() -> bool:
 	return self._profiles.size() != 0
+
+func get_profiles() -> Dictionary:
+	return self._profiles

@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scene/top_level.gd" type="Script" id=1]
 [ext_resource path="res://scene/splash.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/title.tscn" type="PackedScene" id=3]
+[ext_resource path="res://profile/profile_editor.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "mover"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Mover:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1024, 0 ) ]
+}
 
 [node name="TopLevel" type="Control"]
 anchor_right = 1.0
@@ -12,4 +29,31 @@ __meta__ = {
 }
 
 [node name="Splash" parent="." instance=ExtResource( 2 )]
+
+[node name="Mover" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" parent="Mover" instance=ExtResource( 3 )]
+visible = false
+margin_bottom = 40.0
+
+[node name="Submenu" type="Control" parent="Mover"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProfileEditor" parent="Mover/Submenu" instance=ExtResource( 4 )]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/mover = SubResource( 1 )
 [connection signal="splash_finished" from="Splash" to="." method="_on_Splash_splash_finished"]
+[connection signal="transition" from="Mover/Title" to="." method="_on_Title_transition"]
+[connection signal="back" from="Mover/Submenu/ProfileEditor" to="." method="_return"]
