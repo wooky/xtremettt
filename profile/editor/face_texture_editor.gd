@@ -2,16 +2,13 @@ extends WindowDialog
 
 signal texture_changed(texture)
 
-func load_from_profile(profile: Profile) -> void:
-	# TODO
-	pass
+onready var texture: ImageTexture = $VBoxContainer/ScrollContainer/TextureRect.texture
 
-func get_texture() -> Texture:
-	return $VBoxContainer/TextureRect.texture
+func load_from_profile(profile: Profile) -> void:
+	self.texture.set_data(profile.face_texture.duplicate())
 
 func clear_texture() -> void:
-	# TODO
-	pass
+	self.texture.set_data(null)
 
 func _on_FromFile_pressed() -> void:
 	$FileDialog.popup_centered()
@@ -20,9 +17,8 @@ func _on_Done_pressed() -> void:
 	self.hide()
 
 func _on_FileDialog_file_selected(path: String) -> void:
-	var texture := $VBoxContainer/TextureRect.texture as ImageTexture
-	var err := texture.load(path)
+	var err := self.texture.load(path)
 	if err == OK:
-		emit_signal("texture_changed", texture)
+		emit_signal("texture_changed", self.texture)
 	else:
 		$FileLoadingError.popup_centered()

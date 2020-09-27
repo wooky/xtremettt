@@ -29,7 +29,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_right = 699.0
+margin_bottom = 483.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ScrollContainer"]
 margin_right = 699.0
 margin_bottom = 483.0
 size_flags_horizontal = 3
@@ -70,6 +79,7 @@ margin_bottom = 472.0
 popup_exclusive = true
 window_title = "Open Face Texture"
 resizable = true
+mode_overrides_title = false
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png,*.jpg,*.jpeg,*.bmp ; Image Files" )
