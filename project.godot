@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://profile/profile.gd"
 }, {
-"base": "Panel",
-"class": "ProfileMugshot",
-"language": "GDScript",
-"path": "res://profile/profile_mugshot.gd"
-}, {
 "base": "Spatial",
 "class": "ProfilePersonification",
 "language": "GDScript",
@@ -26,7 +21,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Profile": "",
-"ProfileMugshot": "",
 "ProfilePersonification": ""
 }
 
@@ -34,10 +28,17 @@ _global_script_class_icons={
 
 config/name="Super Extreme Tic-Tac-Toe Deluxe Edition"
 run/main_scene="res://scene/top_level.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
 
 [autoload]
 
 ProfileManager="*res://profile/profile_manager.gd"
+
+[display]
+
+window/size/resizable=false
+window/energy_saving/keep_screen_on=false
 
 [rendering]
 

@@ -17,8 +17,19 @@ func load_container(profile: Profile) -> void:
 	$Container/PlayerName.text = profile.player_name
 	$Container/BodyColor.color = profile.body_color
 	$Container/Taunts.text = profile.taunts.join("\n")
-	($Container/ProfileMugshot as ProfileMugshot).personification.load_from_profile(profile)
+	$Container/ProfileMugshot.personification.load_from_profile(profile)
+	$FaceTextureEditor.load_from_profile(profile)
 	$Container.visible = true
 
 func _on_BodyColor_color_changed(color: Color) -> void:
-	($Container/ProfileMugshot as ProfileMugshot).personification.update_body_color(color)
+	$Container/ProfileMugshot.personification.update_body_color(color)
+
+func _on_EditFaceTexture_pressed() -> void:
+	$FaceTextureEditor.popup()
+
+func _on_ClearFaceTexture_pressed() -> void:
+	$FaceTextureEditor.clear_texture()
+	$Container/ProfileMugshot.personification.clear_face_texture()
+
+func _on_FaceTextureEditor_texture_changed(texture: Texture) -> void:
+	$Container/ProfileMugshot.personification.update_face_texture(texture)
