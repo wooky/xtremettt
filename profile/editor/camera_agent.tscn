@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://profile/editor/camera_agent.gd" type="Script" id=1]
+[ext_resource path="res://profile/editor/hourglass.png" type="Texture" id=2]
 
 [node name="CameraAgent" type="Button"]
 margin_right = 12.0
@@ -10,4 +11,33 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PollingDialog" type="WindowDialog" parent="."]
+visible = true
+margin_right = 357.0
+margin_bottom = 43.0
+popup_exclusive = true
+window_title = "Camera Agent"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hourglass" type="TextureRect" parent="PollingDialog"]
+margin_left = 9.0
+margin_top = 6.0
+margin_right = 30.0
+margin_bottom = 38.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="PollingDialog"]
+margin_left = 36.0
+margin_top = 14.0
+margin_right = 348.0
+margin_bottom = 28.0
+text = "Getting your pretty face from the camera agent..."
+
+[node name="PollingTimer" type="Timer" parent="."]
 [connection signal="pressed" from="." to="." method="_on_CameraAgent_pressed"]
+[connection signal="popup_hide" from="PollingDialog" to="." method="_on_PollingDialog_popup_hide"]
+[connection signal="timeout" from="PollingTimer" to="." method="_on_PollingTimer_timeout"]

@@ -7,7 +7,6 @@
 [sub_resource type="ImageTexture" id=1]
 
 [node name="FaceTextureEditor" type="WindowDialog"]
-visible = true
 margin_left = 19.0
 margin_top = 45.0
 margin_right = 728.0
@@ -102,6 +101,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="selection_changed" from="VBoxContainer/ScrollContainer/TextureRect/FaceSelection" to="." method="_face_selection_changed"]
+[connection signal="captured" from="VBoxContainer/HBoxContainer/CameraAgent" to="." method="_on_CameraAgent_captured"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/FromFile" to="FileDialog" method="popup_centered"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Done" to="." method="hide"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

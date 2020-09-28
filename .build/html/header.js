@@ -1,12 +1,25 @@
-let captureFinished = false;
+/** @type {WindowProxy} */ let cameraWindow = null;
 let captureData = null;
 
 function openCameraWindow() {
-    captureFinished = false;
-    window.open("camera.html", "xtremettt_camera", "innerWidth=800,innerHeight=600");
+    cameraWindow = window.open("camera.html", "xtremettt_camera", "innerWidth=800,innerHeight=600");
+}
+
+function isCameraCaptured() {
+    return cameraWindow == null;
+}
+
+function getCaptureData() {
+    return captureData;
+}
+
+function cancelCameraCapture() {
+    if (cameraWindow != null) {
+        cameraWindow.close();
+    }
 }
 
 function setCaptureData(data) {
     captureData = data;
-    captureFinished = true;
+    cameraWindow = null;
 }

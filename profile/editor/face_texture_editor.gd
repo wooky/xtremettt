@@ -29,5 +29,15 @@ func _on_FileDialog_file_selected(path: String) -> void:
 	else:
 		$FileLoadingError.popup_centered()
 
+func _on_CameraAgent_captured(data: PoolByteArray) -> void:
+	var image := Image.new()
+	var err := image.load_jpg_from_buffer(data)
+	if err == OK:
+		self._texture.create_from_image(image)
+		self._face_selection.load_from_image(self._texture.get_data())
+		_face_selection_changed()
+	else:
+		$FileLoadingError.popup_centered()
+
 func _face_selection_changed() -> void:
 	emit_signal("image_changed", get_image())
