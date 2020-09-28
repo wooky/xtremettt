@@ -36,7 +36,7 @@
             const message = document.getElementById("message");
             /** @type {HTMLVideoElement} */ const vidya = document.getElementById("vidya");
             const buttonBar = document.getElementById("button-bar");
-            /** @type {ArrayBuffer} */ let face = null;
+            /** @type {ArrayBuffer} */ let captureData = null;
 
             function hideVideo(msg) {
                 vidya.classList.add("hide");
@@ -89,14 +89,14 @@
                 ctx.drawImage(vidya, 0, 0, canvas.width, canvas.height);
                 canvas.toBlob(blob =>
                     blob.arrayBuffer().then(buffer => {
-                        face = buffer;
+                        captureData = buffer;
                         window.close();
                     }),
                 "image/jpg");
             }
 
             window.addEventListener("beforeunload", () => {
-                // TODO let window.opener know about the video capture
+                window.opener.setCaptureData(captureData);
             });
 
             activateCamera();
