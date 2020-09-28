@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://profile/editor/face_texture_editor.gd" type="Script" id=1]
 [ext_resource path="res://profile/editor/face_selection.tscn" type="PackedScene" id=2]
+[ext_resource path="res://profile/editor/camera_agent.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ImageTexture" id=1]
 
 [node name="FaceTextureEditor" type="WindowDialog"]
+visible = true
 margin_left = 19.0
 margin_top = 45.0
 margin_right = 728.0
@@ -56,13 +58,11 @@ margin_top = 493.0
 margin_right = 699.0
 margin_bottom = 513.0
 custom_constants/separation = 10
+alignment = 2
 
-[node name="FromCamera" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="CameraAgent" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 440.0
 margin_right = 549.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-disabled = true
-text = "From Camera..."
 
 [node name="FromFile" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 559.0
