@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Take a Picture</title>
+        <style>
+            .hide { display: none; }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+            #button-bar {
+                position: fixed;
+                bottom: 20px;
+                display: flex;
+                justify-content: space-evenly;
+                width: 100%;
+            }
+            button {
+                font-size: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="message"></div>
+            <video id="vidya" class="hide"></video>
+            <div id="button-bar">
+                <button class="confirm error" onclick="activateCamera()" disabled>♻</button>
+                <button class="capture" onclick="captureCamera()" disabled>📷</button>
+                <button class="confirm" onclick="confirmCapture()">✔</button>
+                <button class="init capture confirm error" onclick="window.close()">❌</button>
+            </div>
+        </div>
+        <script>
+            const message = document.getElementById("message");
+            /** @type {HTMLVideoElement} */ const vidya = document.getElementById("vidya");
+            const buttonBar = document.getElementById("button-bar");
+            /** @type {ArrayBuffer} */ let face = null;
+
+            function hideVideo(msg) {
+                vidya.classList.add("hide");
+                message.innerText = msg;
+                message.classList.remove("hide");
+            }
+
+            function setButtonState(state) {
+                for (let i = 0; i < buttonBar.children.length; i++) {
+                    const button = buttonBar.children[i];
+                    button.disabled = !button.classList.contains(state);
+                }
+            }
+
+            function activateCamera() {
+                if (vidya.srcObject) {
+                    playStream();
+                    return;
+                }
+                setButtonState("init");
+                hideVideo("Enable webcam to capture your face");
+                navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                .then(stream => {
+                    message.classList.add("hide");
+                    vidya.classList.remove("hide");
+                    vidya.srcObject = stream;
+                    vidya.onloadedmetadata = playStream;
+                })
+                .catch(err => {
+                    setButtonState("error");
+                    hideVideo("Failed to activate camera: " + err.message);
+                })
+            }
+
+            function playStream() {
+                setButtonState("capture");
+                vidya.play();
+            }
+
+            function captureCamera() {
+                setButtonState("confirm");
+                vidya.pause();
+            }
+
+            function confirmCapture() {
+                const canvas = document.createElement("canvas");
+                canvas.width = vidya.videoWidth;
+                canvas.height = vidya.videoHeight;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(vidya, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob(blob =>
+                    blob.arrayBuffer().then(buffer => {
+                        face = buffer;
+                        window.close();
+                    }),
+                "image/jpg");
+            }
+
+            window.addEventListener("beforeunload", () => {
+                // TODO let window.opener know about the video capture
+            });
+
+            activateCamera();
+        </script>
+    </body>
+</html>
