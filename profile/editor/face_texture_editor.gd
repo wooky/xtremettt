@@ -21,19 +21,13 @@ func clear_texture() -> void:
 	self._texture.set_data(null)
 	self._face_selection.hide()
 
-func _on_FromFile_pressed() -> void:
-	$FileDialog.popup_centered()
-
-func _on_Done_pressed() -> void:
-	self.hide()
-
 func _on_FileDialog_file_selected(path: String) -> void:
 	var err := self._texture.load(path)
 	if err == OK:
 		self._face_selection.load_from_image(self._texture.get_data())
-		emit_signal("image_changed", get_image())
+		_face_selection_changed()
 	else:
 		$FileLoadingError.popup_centered()
 
-func _on_FaceSelection_selection_changed() -> void:
+func _face_selection_changed() -> void:
 	emit_signal("image_changed", get_image())

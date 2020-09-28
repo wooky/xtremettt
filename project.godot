@@ -34,8 +34,6 @@ _global_script_class_icons={
 
 config/name="Super Extreme Tic-Tac-Toe Deluxe Edition"
 run/main_scene="res://scene/top_level.tscn"
-run/disable_stdout=true
-run/disable_stderr=true
 
 [autoload]
 

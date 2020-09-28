@@ -3,7 +3,7 @@
 [ext_resource path="res://board/ttt_grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/splash.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 resource_name = "borf"
 length = 4.0
 loop = true
@@ -69,8 +69,7 @@ background_sky = SubResource( 2 )
 background_color = Color( 0.85098, 0.882353, 0.0901961, 1 )
 ambient_light_color = Color( 0.807843, 0.901961, 0.0627451, 1 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "swoosh"
+[sub_resource type="Animation" id=4]
 length = 3.5
 step = 0.25
 tracks/0/type = "value"
@@ -122,7 +121,7 @@ tracks/3/keys = {
 "values": [ SubResource( 3 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [node name="Splash" type="Spatial"]
@@ -135,14 +134,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2.5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "swoosh"
-anims/borf = SubResource( 5 )
-anims/swoosh = SubResource( 1 )
+anims/borf = SubResource( 1 )
+anims/swoosh = SubResource( 4 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

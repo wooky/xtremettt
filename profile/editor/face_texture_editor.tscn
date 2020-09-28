@@ -101,7 +101,7 @@ dialog_text = "Can't load selected face texture."
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="selection_changed" from="VBoxContainer/ScrollContainer/TextureRect/FaceSelection" to="." method="_on_FaceSelection_selection_changed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/FromFile" to="." method="_on_FromFile_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Done" to="." method="_on_Done_pressed"]
+[connection signal="selection_changed" from="VBoxContainer/ScrollContainer/TextureRect/FaceSelection" to="." method="_face_selection_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/FromFile" to="FileDialog" method="popup_centered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Done" to="." method="hide"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

@@ -183,6 +183,6 @@ anims/detrans = SubResource( 13 )
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 autoplay = "deluxe"
 anims/deluxe = SubResource( 14 )
-[connection signal="pressed" from="SinglePlayer" to="." method="_on_SinglePlayer_pressed"]
-[connection signal="pressed" from="Multiplayer" to="." method="_on_Multiplayer_pressed"]
-[connection signal="pressed" from="Profiles" to="." method="_on_Profiles_pressed"]
+[connection signal="pressed" from="SinglePlayer" to="." method="_prepare_to_transition" binds= [ "TODO SINGLEPLAYER" ]]
+[connection signal="pressed" from="Multiplayer" to="." method="_prepare_to_transition" binds= [ "TODO MULTIPLAYER" ]]
+[connection signal="pressed" from="Profiles" to="." method="emit_signal" binds= [ "transition", "ProfileEditor" ]]
