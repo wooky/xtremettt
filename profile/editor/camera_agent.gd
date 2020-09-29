@@ -18,7 +18,7 @@ func _on_PollingDialog_popup_hide() -> void:
 func _on_PollingTimer_timeout() -> void:
 	if JavaScript.eval("isCameraCaptured()"):
 		$PollingTimer.stop()
-		var data = JavaScript.eval("getCaptureData()")
+		var data = JavaScript.eval("captureData")
 		if data != null: emit_signal("captured", data)
 		$PollingDialog.hide()
 
